@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="icons8-cursor-16.png" type="image/x-icon">
+  <title>Conversor de Imagens</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l2.29 4.64 5.13.75-3.71 3.62.88 5.09L12 14.77l-4.59 2.43.88-5.09L4.58 8.39l5.13-.75L12 3z" stroke="#7cc0ff" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      <h1>Conversor de Imagens — 100% no navegador</h1>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="controls">
+          <div>
+            <label for="files">Arquivos</label>
+            <div id="drop" class="drop" tabindex="0" role="button" aria-label="Solte imagens aqui ou clique para escolher">
+              <div>
+                <strong>Solte imagens aqui</strong>
+                <div class="muted">ou clique para selecionar…</div>
+                <small>Formatos comuns: PNG, JPEG, WEBP, BMP, GIF (1º quadro), SVG* (rasteriza)</small>
+              </div>
+              <input id="files" type="file" accept="image/*" multiple class="hidden" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="flex:1 1 220px">
+              <label for="format">Formato de saída</label>
+              <select id="format"></select>
+            </div>
+            <div style="flex:1 1 200px" class="qualityWrap" id="qualityWrap">
+              <label for="quality">Qualidade (apenas formatos com perdas)</label>
+              <input id="quality" type="range" min="0" max="100" value="90" />
+            </div>
+          </div>
+
+          <div class="row">
+            <button id="convert" class="primary">Converter tudo</button>
+            <button id="clear" class="ghost">Limpar</button>
+            <span id="support" class="pill muted" title="Detecção automática de suporte do navegador"></span>
+          </div>
+
+          <div class="footer muted">
+            ⚠️ Limitações: conversão é feita via <code>canvas</code>. GIFs animados viram apenas o primeiro quadro; HEIC/HEIF e alguns AVIF podem não abrir; SVG é rasterizado no tamanho exibido. Tudo roda localmente — os arquivos não saem do seu dispositivo.
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div style="display:grid; gap:12px">
+          <div>
+            <strong>Arquivos carregados</strong>
+            <div id="thumbs" class="thumbs" aria-live="polite"></div>
+          </div>
+          <div>
+            <strong>Registros</strong>
+            <div id="logs" class="list"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <template id="thumb-tpl">
+    <div class="thumb">
+      <img alt="pré-visualização" loading="lazy" />
+      <div class="meta">
+        <span class="name"></span>
+        <a class="pill" target="_blank" rel="noopener">Baixar</a>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
